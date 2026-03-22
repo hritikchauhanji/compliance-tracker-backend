@@ -24,7 +24,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
     "build": "prisma generate && npm run build:app",
-    "build:app": "tsc"
+    "build:app": "tsc",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
