@@ -1,5 +1,6 @@
 import fastify, { FastifyInstance } from "fastify";
 import prismaPlugin from "./config/prisma.js";
+import { taskroutes } from "./modules/task/task.routes.js";
 
 
 const envToLogger = {
@@ -21,6 +22,7 @@ const app: FastifyInstance = fastify({
 })
 
 app.register(prismaPlugin);
+app.register(taskroutes, {prefix: "/api/v1/task"});
 
 app.get("/", async () => {
     return {
