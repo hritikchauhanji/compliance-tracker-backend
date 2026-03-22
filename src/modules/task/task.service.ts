@@ -24,7 +24,7 @@ export async function createTaskService(body: CreateTaskType) {
         }
     })
 
-    if(!task) {
+    if(task) {
         throw new Error("Task already exists");
     }
 
