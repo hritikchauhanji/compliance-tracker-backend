@@ -5,22 +5,22 @@ import { clientRoutes } from "./modules/client/client.routes.js";
 import cors from "@fastify/cors";
 import { env } from "./config/env.js";
 
-const envToLogger = {
-  development: {
-    transport: {
-      target: "pino-pretty",
-      options: {
-        translateTime: "HH:MM:ss Z",
-        ignore: "pid,hostname",
-      },
-    },
-  },
-  production: true,
-  test: false,
-};
+// const envToLogger = {
+//   development: {
+//     transport: {
+//       target: "pino-pretty",
+//       options: {
+//         translateTime: "HH:MM:ss Z",
+//         ignore: "pid,hostname",
+//       },
+//     },
+//   },
+//   production: true,
+//   test: false,
+// };
 
 const app: FastifyInstance = fastify({
-  logger: envToLogger[process.env.NODE_ENV as keyof typeof envToLogger] ?? true,
+  logger: true,
 });
 
 app.register(cors, {
