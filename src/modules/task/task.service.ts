@@ -81,9 +81,20 @@ export async function getTasksByClientService(
 
   const now = new Date();
 
+  const stats = {
+    total: tasks.length,
+    pending: 0,
+    completed: 0,
+    overdue: 0,
+  };
+
   const data = tasks.map((task) => {
     const isOverdue =
       task.status === "PENDING" && new Date(task.due_date) < now;
+
+    if (task.status === "PENDING") stats.pending++;
+    if (task.status === "COMPLETED") stats.completed++;
+    if (isOverdue) stats.overdue++;
 
     return {
       ...task,
@@ -91,7 +102,10 @@ export async function getTasksByClientService(
     };
   });
 
-  return data;
+  return {
+    tasks,
+    stats,
+  };
 }
 
 export async function updateTaskStatusService(

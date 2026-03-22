@@ -78,12 +78,15 @@ export async function getTasksByClientController(
   }
 
   try {
-    const tasks = await getTasksByClientService(parsed_param.data, parsed.data);
+    const result = await getTasksByClientService(
+      parsed_param.data,
+      parsed.data,
+    );
 
     return res.status(200).send({
       success: true,
       message: "Get tasks by client id",
-      data: tasks,
+      data: result,
     });
   } catch (error: any) {
     if (error.message === "Client not found") {
