@@ -58,6 +58,7 @@ export async function getAllClientsController(
 
     return res.status(200).send({
       success: true,
+      message: "Fetch all clients.",
       ...result,
     });
   } catch (error: any) {

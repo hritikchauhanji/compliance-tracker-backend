@@ -1,7 +1,10 @@
 import { FastifyInstance } from "fastify";
-import { createTaskController } from "./task.controller.js";
+import {
+  createTaskController,
+  getTasksByClientController,
+} from "./task.controller.js";
 
-
-export async function taskroutes(app:FastifyInstance) {
-    app.post("/", createTaskController);
+export async function taskroutes(app: FastifyInstance) {
+  app.post("/", createTaskController);
+  app.get("/:clientId", getTasksByClientController);
 }

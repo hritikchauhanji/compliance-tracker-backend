@@ -6,7 +6,20 @@ export const createTaskSchema = z.object({
   description: z.string().optional(),
   category: z.enum(["GST", "TAX", "AUDIT", "LEGAL", "OTHER"]),
   due_date: z.coerce.date(),
-  priority: z.enum(["LOW","MEDIUM","HIGH"]),
+  priority: z.enum(["LOW", "MEDIUM", "HIGH"]),
 });
 
-export type CreateTaskType = z.infer<typeof createTaskSchema>
+export type CreateTaskType = z.infer<typeof createTaskSchema>;
+
+export const querySchema = z.object({
+  status: z.enum(["PENDING", "COMPLETED"]).optional(),
+  category: z.enum(["GST", "TAX", "AUDIT", "LEGAL", "OTHER"]).optional(),
+});
+
+export type QueryType = z.infer<typeof querySchema>;
+
+export const clientIdSchema = z.object({
+  clientId: z.string().uuid("Invalid client id"),
+});
+
+export type ClientIdType = z.infer<typeof clientIdSchema>;
