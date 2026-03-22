@@ -4,8 +4,8 @@ export const createTaskSchema = z.object({
   client_id: z.string().uuid("Invalid client id"),
   title: z.string().min(1),
   description: z.string().optional(),
-  category: z.string(),
-  due_date: z.string(),
+  category: z.enum(["GST", "TAX", "AUDIT", "LEGAL", "OTHER"]),
+  due_date: z.coerce.date(),
   priority: z.string().optional(),
 });
 
