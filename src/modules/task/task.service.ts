@@ -28,7 +28,7 @@ export async function createTaskService(body: CreateTaskType) {
         throw new Error("Task already exists");
     }
 
-    const createTask = prisma.task.create({
+    const createTask = await prisma.task.create({
         data: {
             client_id,
             title,
