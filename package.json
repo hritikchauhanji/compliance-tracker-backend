@@ -22,7 +22,9 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "build": "prisma generate && npm run build:app",
+    "build:app": "tsc"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
