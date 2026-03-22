@@ -6,7 +6,7 @@ export const createTaskSchema = z.object({
   description: z.string().optional(),
   category: z.enum(["GST", "TAX", "AUDIT", "LEGAL", "OTHER"]),
   due_date: z.coerce.date(),
-  priority: z.string().optional(),
+  priority: z.enum(["LOW","MEDIUM","HIGH"]),
 });
 
 export type CreateTaskType = z.infer<typeof createTaskSchema>
