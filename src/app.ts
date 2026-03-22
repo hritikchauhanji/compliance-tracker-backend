@@ -20,7 +20,7 @@ const envToLogger = {
 };
 
 const app: FastifyInstance = fastify({
-  logger: envToLogger.development ?? true,
+  logger: envToLogger[process.env.NODE_ENV as keyof typeof envToLogger] ?? true,
 });
 
 app.register(cors, {
