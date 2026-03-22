@@ -23,3 +23,15 @@ export const clientIdSchema = z.object({
 });
 
 export type ClientIdType = z.infer<typeof clientIdSchema>;
+
+export const updateTaskSchema = z.object({
+  status: z.enum(["PENDING", "COMPLETED"]),
+});
+
+export type UpdateTaskType = z.infer<typeof updateTaskSchema>;
+
+export const taskIdSchema = z.object({
+  taskId: z.string().uuid("Invalid task id"),
+});
+
+export type TaskIdType = z.infer<typeof taskIdSchema>;

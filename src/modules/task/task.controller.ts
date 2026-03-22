@@ -1,9 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createTaskService, getTasksByClientService } from "./task.service.js";
+import {
+  createTaskService,
+  getTasksByClientService,
+  updateTaskStatusService,
+} from "./task.service.js";
 import {
   clientIdSchema,
   createTaskSchema,
   querySchema,
+  taskIdSchema,
+  updateTaskSchema,
 } from "./task.schema.js";
 
 export async function createTaskController(
@@ -81,6 +87,56 @@ export async function getTasksByClientController(
     });
   } catch (error: any) {
     if (error.message === "Client not found") {
+      return res.status(404).send({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    return res.status(500).send({
+      success: false,
+      message: error.message || "Internal Server Error",
+    });
+  }
+}
+
+export async function updateTaskController(
+  req: FastifyRequest,
+  res: FastifyReply,
+) {
+  const parsed_param = taskIdSchema.safeParse(req.params);
+
+  if (!parsed_param.success) {
+    return res.status(400).send({
+      success: false,
+      message: "Invalid query params",
+      errors: parsed_param.error.flatten().fieldErrors,
+    });
+  }
+
+  const parsed = updateTaskSchema.safeParse(req.body);
+
+  if (!parsed.success) {
+    return res.status(400).send({
+      success: false,
+      message: "Invalid query params",
+      errors: parsed.error.flatten().fieldErrors,
+    });
+  }
+
+  try {
+    const updated = await updateTaskStatusService(
+      parsed_param.data,
+      parsed.data,
+    );
+
+    return res.send({
+      success: true,
+      message: "Task status updated successfully",
+      data: updated,
+    });
+  } catch (error: any) {
+    if (error.message === "Task not found") {
       return res.status(404).send({
         success: false,
         message: error.message,

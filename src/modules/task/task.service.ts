@@ -1,5 +1,11 @@
 import { prisma } from "../../utils/prism.util.js";
-import { ClientIdType, CreateTaskType, QueryType } from "./task.schema.js";
+import {
+  ClientIdType,
+  CreateTaskType,
+  QueryType,
+  TaskIdType,
+  UpdateTaskType,
+} from "./task.schema.js";
 
 export async function createTaskService(body: CreateTaskType) {
   const { title, category, client_id, due_date, description, priority } = body;
@@ -86,4 +92,29 @@ export async function getTasksByClientService(
   });
 
   return data;
+}
+
+export async function updateTaskStatusService(
+  param: TaskIdType,
+  body: UpdateTaskType,
+) {
+  const { taskId } = param;
+  const { status } = body;
+  const task = await prisma.task.findUnique({
+    where: { id: taskId },
+    select: { id: true },
+  });
+
+  if (!task) {
+    throw new Error("Task not found");
+  }
+
+  const udpatedTask = await prisma.task.update({
+    where: { id: taskId },
+    data: {
+      status,
+    },
+  });
+
+  return udpatedTask;
 }
