@@ -16,3 +16,13 @@ export const createClientSchema = z.object({
 });
 
 export type CreateClientType = z.infer<typeof createClientSchema>;
+
+export const querySchema = z.object({
+  search: z.string().optional(),
+  sortBy: z.enum(["company_name", "created_at"]).optional(),
+  order: z.enum(["asc", "desc"]).optional(),
+
+  page: z.coerce.number().int().positive().min(1).default(1),
+  limit: z.coerce.number().int().positive().min(1).max(100).default(10),
+});
+export type QueryType = z.infer<typeof querySchema>;
