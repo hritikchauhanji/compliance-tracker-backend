@@ -34,7 +34,7 @@ export async function createTaskService(body: CreateTaskType) {
             title,
             description,
             category,
-            due_date,
+            due_date: new Date(due_date),
             priority,
         }
     })
