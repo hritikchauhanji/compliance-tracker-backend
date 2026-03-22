@@ -1,0 +1,26 @@
+{
+  "name": "compliance-tracker-backend",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Backend",
+    "Nodejs",
+    "Prisma",
+    "Compliance-Tracker"
+  ],
+  "homepage": "https://github.com/hritikchauhanji/compliance-tracker-backend#readme",
+  "bugs": {
+    "url": "https://github.com/hritikchauhanji/compliance-tracker-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hritikchauhanji/compliance-tracker-backend.git"
+  },
+  "license": "ISC",
+  "author": "Hritik Chauhan",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
