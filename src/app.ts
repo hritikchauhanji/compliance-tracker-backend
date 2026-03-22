@@ -3,6 +3,7 @@ import prismaPlugin from "./config/prisma.js";
 import { taskroutes } from "./modules/task/task.routes.js";
 import { clientRoutes } from "./modules/client/client.routes.js";
 import cors from "@fastify/cors";
+import { env } from "./config/env.js";
 
 const envToLogger = {
   development: {
@@ -23,7 +24,7 @@ const app: FastifyInstance = fastify({
 });
 
 app.register(cors, {
-  origin: "http://localhost:5173",
+  origin: env.frontendUrl,
   methods: ["GET", "POST", "PATCH", "DELETE"],
 });
 
