@@ -103,7 +103,7 @@ export async function getTasksByClientService(
   });
 
   return {
-    tasks,
+    tasks: data,
     stats,
   };
 }
